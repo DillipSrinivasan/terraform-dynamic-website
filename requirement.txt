@@ -1,0 +1,25 @@
+Sprint 1:
+1.VPC and enable DNS resolution and DNS hostname -> done
+2. Internet Gateway and attach to VPC -> done
+3. create Public subnet in AZ1 and AZ2(10.0.0.0/24,10.0.1.0/24) and enable auto-assign public IPV4 -> done
+4. Create public route table, add IG as route and associate 2 public subnet -> done
+5. create 4 private subnets for app and data in AZ1 and AZ2 (
+    APP AZ1->10.0.2.0/24,
+    APP AZ2->10.0.3.0/24,
+    Data AZ1-> 10.0.4.0/24,
+    Data AZ2->10.0.5.0/24
+    )
+6. Create NAT Gateway (
+    NAT Gateway AZ1 -> public subnet Az1 -> connectivity typw = public , allocate ellastic Ip
+    NAT Gateway AZ2 -> public subnet Az2 -> connectivity typw = public , allocate ellastic Ip
+)
+7. Create Private Route table(
+    private route table AZ1-> add Nat Gateway AZ1 as route and associte private APP AZ1 and Private Data AZ1 subnet
+    private route table AZ2-> add Nat Gateway AZ2 as route and associte private APP AZ2 and Private Data AZ2 subnet
+)
+8. Security Groups (
+    1.ALB SG {allow HTTP(80) and HTTPS(443)}
+    2.SSH SG {allow SSH (22)}
+    3.webserver SG { http and https->ALB SG, ssh ->SSH SG}
+    4.Database SG{MYSQL/Aurora port 3306 -> webserver SG}
+)
